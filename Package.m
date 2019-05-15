@@ -7,10 +7,10 @@ classdef Package
     end
     
     properties 
-        delay;      %Delay itself is a variable, caculated und accumulated in the whole process.
+        delay;      %Delay itself is a variable, caculated and accumulated in the whole process.
                     %Delay from transmission and waiting time should be written in. 
                     %What's the relation between delay and priority?
-        max_delay;  %The longest accepted delay for every package
+        max_delay;  %The longest accepted delay for every package. (That should be at least longer than transmission delay)
                     
         priority_value;     %Still not clear what the priority depends on 
     end
