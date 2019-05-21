@@ -1,0 +1,1 @@
+These are the two current version of the signal generator. Version 1 is simpler, as it just uses a sin and a cos function, but is less realistic. Version 2 has two quadratic components, which make it's beginning and end seem more realistic.
