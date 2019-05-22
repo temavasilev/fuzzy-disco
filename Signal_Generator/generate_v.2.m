@@ -2,10 +2,10 @@ close all
 clear all
 clc
 
-SCALING = 1000;
-VALUES_PER_HOUR=12;
+SCALING = 1000; %simple multiplier for height of curve
+VALUES_PER_HOUR=4; %affects Noise. Bigger number -> more Noise. Minimum is 1. Any higher than 15 is overkill
 STEP = 1/VALUES_PER_HOUR;
-baseline=250;
+baseline=SCALING/5; %constant value that is added to every point on the signal
 NOISE = SCALING*(randn (VALUES_PER_HOUR*24,1))/20;
 time1=STEP:STEP:6;
 time2=(6+STEP):STEP:12;
