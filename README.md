@@ -18,10 +18,12 @@ Description of the package class
 
 ## History
 Description of the history class
-Functions     |  Description
-------------- | --------------------------------------------
-History       | Constructor
-predict       | Predicts the slope given at a certain time
+```MATLAB
+HISTORY = History(tmax,step_size)
+HISTORY.predict(t)
+HISTORY.record(t,amplitude)
+HISTORY.adjust()
+```
 
 ### Record
 Description of the record class
