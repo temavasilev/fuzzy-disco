@@ -18,10 +18,10 @@ Description of the package class
 
 ## History
 Description of the history class
-Functions  | Description
-------------- | -------------
-History  | Constructor
-predict  | Predicts the slope given at a certain time
+Functions     |  Description
+------------- | --------------------------------------------
+History       | Constructor
+predict       | Predicts the slope given at a certain time
 
 ### Record
 Description of the record class
