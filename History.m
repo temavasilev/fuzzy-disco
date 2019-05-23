@@ -10,24 +10,28 @@ classdef History < handle
         size % The size of both s_predicted and s_actual
         tmax % The maximum time; if exceeded, we reset
         flag % Indicates wether s_predicted is holding data
+        dist % The step size in TU
     end
     
     methods
         function obj = History(tmax,step_size)
             %History Construct an instance of this class
             %   Creates suitable Records
+            %   tmax: maximum time in Time Units TU
+            %   step_size: interval between recordings in time units TU
             obj.tmax = tmax;
-            obj.size = tmax/step_size;
+            obj.size = ceil(tmax/step_size);
             obj.s_predicted = Record(obj.size,step_size);
             obj.s_actual = Record(obj.size,step_size);
             obj.weight = 1;
             obj.flag = 0;
+            obj.dist = step_size;
         end
         
         function slope = predict(obj,t)
             %predict Predicts the estimated slope for the next time window
             %   Detailed explanation goes here
-            slope = obj.s_predicted.at(t+1) - obj.s_predicted.at(t);
+            slope = obj.s_predicted.at(t+obj.dist) - obj.s_predicted.at(t);
         end
         
         function record(obj,t,amplitude)
