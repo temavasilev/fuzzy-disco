@@ -12,14 +12,14 @@ classdef Package
                     %What's the relation between delay and priority?
         max_delay;  %The longest accepted delay for every package. (That should be at least longer than transmission delay)
                     
-        priority_value;     %Still not clear what the priority depends on 
+        package_delay;  %Acceptable delay for package
     end
     
     methods
-        function obj = Package(priority)                %Constructor
-            if ( priority >= 0 && priority <= 150 )
-            obj.priority_value = priority;
-            obj.delay = 1 / priority;                   %Delay is inversely proportional to its priority
+        function obj = Package(package_delay)                %Constructor
+            if ( package_delay >= 0 && package_delay <= 150 )
+            obj.package_delay = pDelay;
+            %obj.delay = 1 / priority;                   %Delay is inversely proportional to its priority
             else
                 error('Package can not be created with given priority.');
             end
@@ -29,8 +29,8 @@ classdef Package
             processing_delay = obj.delay;
         end
         
-        function priority = get.priority_value(obj)     %Get-function for priority
-            priority = obj.priority_value;
+        function pDelay = get.package_delay(obj)  %Get-function for package_delay
+            pDelay = obj.package_delay;
         end
     end
     
