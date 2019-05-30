@@ -7,30 +7,43 @@ classdef Package
     end
     
     properties 
-        delay;      %Delay itself is a variable, caculated and accumulated in the whole process.
-                    %Delay from transmission and waiting time should be written in. 
-                    %What's the relation between delay and priority?
-        max_delay;  %The longest accepted delay for every package. (That should be at least longer than transmission delay)
+        types ={'A','B','C'};            %Three types of packages
+        tag;                             %with different tags which means diffrent tolerances
+        tolerance;                       %The longest surivive time 
+        endpoint;                        %Before global time comes to endpoint packages should be processed or droped.
+                                         %It also should be used be calculated to load packages to CPUs
+        age;                             %the synonymy as delay, itself is a variable, accumulated in the whole process.
                     
-        package_delay;  %Acceptable delay for package
     end
     
     methods
-        function obj = Package(package_delay)                %Constructor
-            if ( package_delay >= 0 && package_delay <= 150 )
-            obj.package_delay = pDelay;
-            %obj.delay = 1 / priority;                   %Delay is inversely proportional to its priority
+        function obj = Package(generated_time)                %Constructor
+            obj.tag = types(randi([1 3],1,1));
+            if strcmp(obj.tag,'A')                            %Set tolerance based on type of the package
+                obj.tolerance = 10;
+            elseif strcmp(obj.tag, 'B')
+                obj.tolerance = 7;
             else
-                error('Package can not be created with given priority.');
+                obj.tolerance = 3;
             end
+            obj.endpoint =generated_time + tolerance;       %Set endpoint for the package
         end
             
-        function processing_delay = get.delay(obj)      %Get-function for delay
-            processing_delay = obj.delay;
+        function living_time = getage(obj)                   %Get-function for age
+            living_time = obj.age;
         end
         
-        function pDelay = get.package_delay(obj)  %Get-function for package_delay
-            pDelay = obj.package_delay;
+        function obj = adddelay(obj,new_delay)               %Function to accumulate delay to age
+            accumulate_delay = new_delay + obj.age;          %new_delay will be calculated outside? or with a constant after everty loop?
+            obj.age = accumulate_delay;
+        end
+        
+        function ending_time = getendpoint(obj)                    %Get-function for getendpoint
+            ending_time = obj.endpoint;
+        end
+        
+        function tag = gettag(obj)                     %Get-function for tag
+            tag = disp(obj.tag);
         end
     end
     
