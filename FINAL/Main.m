@@ -1,8 +1,17 @@
 %Main Function
+% Implementation of history:
+% The problem of empty prediction values for the first run persists.
+% And since we are only doing one (first) run, we do never get any prediction.
+% Alternative would be, to load a prediction from file (needs to be implemented)
+% or to let the program run for multiple days.
+% Both should be implemented imho.
 
 VALUES_PER_HOUR = 1;
 
 [Distribution, Frequency] = generate (25,VALUES_PER_HOUR);
+
+% Create a history of signal values
+history = History(24*VALUES_PER_HOUR);
 
 Q = int16.empty;
 
@@ -26,6 +35,9 @@ i=1;
 for Cycle_Counter = 1:1:(VALUES_PER_HOUR*24)
     
     package_amount = Distribution(Cycle_Counter);
+    
+    % Record the current actual package amount at the given time frame
+    history.record(Cycle_Counter, package_amount);
     
     %package_amount = 2;
     
@@ -80,9 +92,10 @@ for Cycle_Counter = 1:1:(VALUES_PER_HOUR*24)
     %i Packages have been dropped
     i = 1;
     
-    %expected_traffic = assumption (Cycle_Counter); /change to prediction
+    % Get the expected distribution of next cycle
+    expected_traffic = history.predict (Cycle_Counter);
     
-    expected_traffic = package_amount;
+    %expected_traffic = package_amount;
     
     traffic_change = expected_traffic-package_amount;
     
