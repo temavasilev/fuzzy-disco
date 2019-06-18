@@ -32,6 +32,15 @@ CPUs(3,3) = 0.15;
 
 i=1;
 
+% In it's current form this for loop does
+% only run for one day. Thus predictions of any kind are
+% rendered useless. We need to generate differing data for
+% multiple days!
+% Imho we should have an outer infinite loop, that generates new days.
+% And in this loop, we evaluate each day with different data and thus
+% we do obtain predictions.
+% After each day we can update our prediction.
+
 for Cycle_Counter = 1:1:(VALUES_PER_HOUR*24)
     
     package_amount = Distribution(Cycle_Counter);
