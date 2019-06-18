@@ -26,7 +26,7 @@ for i = 1:1:(24*VALUES_PER_HOUR)
        FINALSIGNAL(i) = 1;
    end
    
-clc
+
 end
 
 %plot (  time, FINALSIGNAL);
