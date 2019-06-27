@@ -12,17 +12,17 @@ classdef Cpu < handle
         function obj = Cpu()
             %CPU Construct an instance of this class
             %   Empty constructor
+            obj.packets = 0;
         end
         
-        function assign(obj)
+        function assign(obj,n)
             %assign Assign a packet to a CPU
             %   The packet is added to the processing stack and
             %   processed on the next call to process.
             %   Since all packets are simplified to their numeric
             %   urgency value, we can simply increment the package
             %   counter.
-            obj.packets = obj.packets + 1;
-            
+            obj.packets = obj.packets + n;
         end
         
         function process(obj)
@@ -51,6 +51,10 @@ classdef Cpu < handle
             %   Returns 'true' is the CPU is available.
             %   Returns 'false' if the CPU is busy.
             status = (obj.status == false);
+        end
+        
+        function n = availableWhen(obj)
+            n = ceil(obj.packets / obj.ppc);
         end
     end
 end

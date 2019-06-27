@@ -76,7 +76,11 @@ classdef Distribution < handle
         end
         
         function amp = at(obj,cycle)
-            amp = obj.field(cycle);
+            if(cycle < obj.size)
+                amp = obj.field(cycle);
+            else
+                amp = 0;
+            end
         end
         
         function set(obj,cycle,amp)

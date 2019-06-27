@@ -21,7 +21,7 @@ classdef Settings < handle
            obj.interval = 100;
            obj.cpus = 3;
            obj.cycles = 24;
-           obj.scaling = 10;
+           obj.scaling = 50;
            obj.noise = 5;
         end
         
