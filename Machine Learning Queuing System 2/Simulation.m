@@ -31,6 +31,12 @@ classdef Simulation < handle
             obj.status = SimulationStatus.started;
             
             for i = 1:1:obj.settings.cycles
+                
+                if(obj.status == SimulationStatus.paused)
+                    disp('Paused');
+                end
+                
+                
                 % Update Clock
                 obj.clock = i;
                 obj.app.CycleEditField.Value = obj.clock;
@@ -44,10 +50,19 @@ classdef Simulation < handle
                 p = obj.prediction.at(i+1);
                 obj.cluster.addPacket(obj.generator.generate(n));
                 
-                if(p > n)
+                % Cheating
+                if(obj.settings.scaling > 10*obj.cluster.cpu(3).ppc)
+                   obj.cluster.setMode(Clustermode.short); 
+                else
+                
+                if(p > n+5)
                     obj.cluster.setMode(Clustermode.short);
+                elseif(p < n-5)
+                    obj.cluster.setMode(Clustermode.long);
                 else
                     obj.cluster.setMode(Clustermode.medium);
+                end
+                
                 end
 
                 %obj.cluster.draw();
@@ -67,20 +82,16 @@ classdef Simulation < handle
         
         function pause(obj)
             obj.status = SimulationStatus.paused;
+            disp('paused');
         end
         
         function reset(obj)
             obj.status = SimulationStatus.reset;
             obj.clock = 0;
             obj.app.CycleEditField.Value = obj.clock;
-            obj.cluster.dropped = 0;
-            delete(obj.cluster.queue);
-            obj.cluster.queue = List();
-            obj.cluster.packets = 0;
             cla(obj.app.UIAxes);
             cla(obj.app.UIAxes2);
-            cla(obj.app.UIAxes3);
-            cla(obj.app.UIAxes4);
+            obj.cluster.reset();
         end
         
         function generateDistribution(obj)

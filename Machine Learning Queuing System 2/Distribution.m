@@ -60,7 +60,7 @@ classdef Distribution < handle
         
         function save(obj,filename)
             fileID = fopen(filename,'w');
-            fprintf(fileID,obj.field);
+            fwrite(fileID,obj.field);
             fclose(fileID);
         end
         

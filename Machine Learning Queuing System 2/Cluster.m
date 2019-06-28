@@ -61,6 +61,26 @@ classdef Cluster < handle
             obj.dropped_last = 0;
             obj.cum_last = 0;
         end
+        
+        function reset(obj)
+           obj.setMode(Clustermode.short);
+           
+           obj.qsize_last = 0;
+           obj.dropped_last = 0;
+           obj.cum_last = 0;
+           
+           obj.dropped = 0;
+           obj.packets = 0;
+           
+           delete(obj.queue);
+           obj.queue = List();
+           
+           obj.app.QueuesizeEditField.Value = obj.packets;
+           obj.app.DroppedpacketsEditField.Value = obj.dropped;
+           
+           cla(obj.app.UIAxes3);
+           cla(obj.app.UIAxes4);
+        end
 
         function addCpu(obj)
             if(isempty(obj.cpu))
@@ -201,7 +221,51 @@ classdef Cluster < handle
             %
             %
             elseif(obj.mode == Clustermode.long)
-                
+               % Determine the number of packets we can process
+               % in the current cycle and in upcoming cycles
+               capacity = 0;
+               for i=1:1:obj.num_cpus
+                  if(obj.cpu(i).available)
+                      capacity = capacity + obj.cpu(i).ppc * 6;
+                  elseif(obj.cpu(i).availableWhen() < 6)
+                      capacity = capacity + obj.cpu(i).ppc;
+                  end
+               end
+               
+               % If we can allocate more packets than we need, we reduce
+               % the capacity to the packet amount.
+               if(capacity > obj.packets)
+                  capacity = obj.packets; 
+               end
+               
+               % Remove the packets from the queue
+               for k=1:1:capacity
+                   obj.queue.deleteLast();
+                   obj.packets = obj.packets - 1;
+               end
+               
+               % Packet iterator
+               packetIt = capacity;
+               
+               % Assign packets to CPUs
+               for i=1:1:obj.num_cpus
+                   if(packetIt <= 0)
+                       break;
+                   end
+                   
+                    if(obj.cpu(i).available)
+                        num = obj.cpu(i).ppc * 3;
+                        if(obj.cpu(i).ppc > packetIt)
+                            num = packetIt;
+                            packetIt = 0;
+                        else
+                            packetIt = packetIt - obj.cpu(i).ppc*3;
+                        end
+                        obj.cpu(i).assign(num);
+                    else
+                        active_cpus = active_cpus + 1;
+                    end
+               end
             end
 
             obj.app.LoadGauge.Value = 100 * (active_cpus / obj.num_cpus);

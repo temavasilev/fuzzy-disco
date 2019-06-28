@@ -28,9 +28,9 @@ classdef PacketGenerator < handle
             obj.probpos_med = obj.probpos_low + obj.probability_med;
             obj.probpos_high = obj.probpos_med + obj.probability_high;
             
-            obj.range_low = [50 100];
-            obj.range_med = [20 50];
-            obj.range_high = [5 20];
+            obj.range_low = [15 25];%[50 100];
+            obj.range_med = [10 15];%[20 50];
+            obj.range_high = [5 10];%[5 20];
         end
         
         function packets = generate(obj, n)

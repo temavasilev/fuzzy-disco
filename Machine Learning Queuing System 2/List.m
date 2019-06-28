@@ -14,6 +14,19 @@ classdef List < handle
             %   Empty constructor
         end
         
+        function delete(obj)
+           if(isempty(obj.first))
+               return
+           end
+           
+           n = obj.first;
+           while(~isempty(n))
+               next = n.next;
+               delete(n);
+               n = next;
+           end
+        end
+        
         function print(obj)
             %print Print list elements
            if(isempty(obj.first))

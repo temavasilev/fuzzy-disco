@@ -1,0 +1,129 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="2521459110" file="C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System\Simulation.prj" location="C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System" name="Simulation" preferred-package-location="C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System\Simulation\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Simulation</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>\Simulation\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\Simulation\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\Simulation\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\Simulation\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\Simulation</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\app.mlapp</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\app.mlapp</file>
+      <file>${PROJECT_ROOT}\Cluster.m</file>
+      <file>${PROJECT_ROOT}\Clustermode.m</file>
+      <file>${PROJECT_ROOT}\Cpu.m</file>
+      <file>${PROJECT_ROOT}\data</file>
+      <file>${PROJECT_ROOT}\Distribution.m</file>
+      <file>${PROJECT_ROOT}\List.m</file>
+      <file>${PROJECT_ROOT}\Node.m</file>
+      <file>${PROJECT_ROOT}\PacketClass.m</file>
+      <file>${PROJECT_ROOT}\PacketGenerator.m</file>
+      <file>${PROJECT_ROOT}\Settings.m</file>
+      <file>${PROJECT_ROOT}\Simulation.m</file>
+      <file>${PROJECT_ROOT}\SimulationStatus.m</file>
+      <file>${PROJECT_ROOT}\startup.m</file>
+    </fileset.resources>
+    <fileset.package>
+      <file>${PROJECT_ROOT}\README.md</file>
+    </fileset.package>
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\Simulation\for_testing" name="splash.png" optional="false">C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System\Simulation\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\Simulation\for_testing" name="Simulation.exe" optional="false">C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System\Simulation\for_testing\Simulation.exe</file>
+      <file location="${PROJECT_ROOT}\Simulation\for_testing" name="readme.txt" optional="true">C:\Users\Windows-User\Documents\MATLAB\Machine Learning Queuing System\Simulation\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2019a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
