@@ -47,8 +47,10 @@ classdef PacketGenerator < handle
                 % High prioroty
                 elseif(class > obj.probpos_med && class <= obj.probpos_high)
                     packets(i) = (obj.range_high(2) - obj.range_high(1)) * rand(1) + obj.range_high(1);
+                else
+                    packets(i) = obj.range_high(2);
                 end
-                
+
                 packets(i) = round(packets(i));
             end
         end

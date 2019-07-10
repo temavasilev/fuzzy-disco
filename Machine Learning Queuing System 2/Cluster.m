@@ -248,18 +248,18 @@ classdef Cluster < handle
                packetIt = capacity;
                
                % Assign packets to CPUs
-               for i=1:1:obj.num_cpus
+               for i=1:1:obj.num_cpus-1
                    if(packetIt <= 0)
                        break;
                    end
                    
                     if(obj.cpu(i).available)
-                        num = obj.cpu(i).ppc * 3;
+                        num = obj.cpu(i).ppc * 6;
                         if(obj.cpu(i).ppc > packetIt)
                             num = packetIt;
                             packetIt = 0;
                         else
-                            packetIt = packetIt - obj.cpu(i).ppc*3;
+                            packetIt = packetIt - obj.cpu(i).ppc*6;
                         end
                         obj.cpu(i).assign(num);
                     else
@@ -268,7 +268,7 @@ classdef Cluster < handle
                end
             end
 
-            obj.app.LoadGauge.Value = 100 * (active_cpus / obj.num_cpus);
+           % obj.app.LoadGauge.Value = 100 * (active_cpus / obj.num_cpus);
             obj.draw();
             
             % Perform processing
@@ -285,9 +285,10 @@ classdef Cluster < handle
             obj.table = cell(obj.num_cpus,4);
             for i = 1:1:obj.num_cpus
                obj.table(i,1) = {i};
-               obj.table(i,2) = {obj.cpu(i).status};
+               obj.table(i,2) = {obj.cpu(i).did_work};
                obj.table(i,3) = {obj.cpu(i).ppc};
                obj.table(i,4) = {obj.cpu(i).packets};
+               obj.cpu(i).did_work = false;
             end
             obj.app.UITable.Data = obj.table;
             

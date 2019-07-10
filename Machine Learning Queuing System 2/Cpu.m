@@ -6,6 +6,7 @@ classdef Cpu < handle
         ppc = 1 %  number of packages the cpu can process per cycle
         packets = 0 % number of packets waiting to be processed
         status = false % cpu processing status (bool: true == busy)
+        did_work = false
     end
     
     methods
@@ -29,8 +30,14 @@ classdef Cpu < handle
             %process Process packets
             %   An amount of 'ppc' packets is removed from the
             %   processing stack and processed.
-            obj.status = true;
-            obj.packets = obj.packets - obj.ppc;
+
+            if(obj.packets > 0)
+                obj.status = true;
+                obj.packets = obj.packets - obj.ppc;
+                obj.did_work = true;
+            else
+                obj.did_work = false;
+            end
             
             % Are we done processing?
             if(obj.packets <= 0)
